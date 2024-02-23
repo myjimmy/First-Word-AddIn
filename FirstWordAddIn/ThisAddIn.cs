@@ -29,6 +29,8 @@ namespace FirstWordAddIn
         {
             this.Startup += new System.EventHandler(ThisAddIn_Startup);
             this.Shutdown += new System.EventHandler(ThisAddIn_Shutdown);
+            Application.DocumentBeforeSave +=
+                new Word.ApplicationEvents4_DocumentBeforeSaveEventHandler(Application_DocumentBeforeSave);
         }
         
         #endregion
