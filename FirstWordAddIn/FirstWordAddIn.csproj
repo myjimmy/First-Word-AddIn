@@ -220,6 +220,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="MyRibbon.resx">
+      <DependentUpon>MyRibbon.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="FirstWordAddIn_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -228,6 +231,12 @@
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="MyRibbon.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="MyRibbon.Designer.cs">
+      <DependentUpon>MyRibbon.cs</DependentUpon>
     </Compile>
     <Compile Include="ThisAddIn.cs">
       <SubType>Code</SubType>
