@@ -71,9 +71,10 @@
             // btnAbout
             // 
             this.btnAbout.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-            this.btnAbout.ImageName = "About";
             this.btnAbout.Label = "button1";
             this.btnAbout.Name = "btnAbout";
+            this.btnAbout.OfficeImageId = "About";
+            this.btnAbout.ScreenTip = "About this add-in";
             this.btnAbout.ShowImage = true;
             this.btnAbout.SuperTip = "Information about this add-in.";
             this.btnAbout.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.onAction_button);
