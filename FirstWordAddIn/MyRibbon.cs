@@ -18,8 +18,11 @@ namespace FirstWordAddIn
             switch (e.Control.Id)
             {
                 case "btnAbout":
+                    AboutForm frmAbout = new AboutForm();
+                    frmAbout.ShowDialog();
                     break;
-                default: break;
+                default:
+                    break;
             }
         }
     }
