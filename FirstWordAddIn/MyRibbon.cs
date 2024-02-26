@@ -58,6 +58,7 @@ namespace FirstWordAddIn
 
         #endregion
 
+        // Normal Button
         public void OnAction_Button(Office.IRibbonControl control)
         {
             switch (control.Id)
@@ -68,8 +69,37 @@ namespace FirstWordAddIn
                     frmAbout.ShowDialog();
                     break;
                 default:
+                    MessageBox.Show("You clicked " + control.Id);
                     break;
             }
+        }
+
+        // Toggle Button
+        public void OnAction_PageBreakBefore(Office.IRibbonControl control, bool pressed)
+        {
+            if (control.Id == "btnPageBreakBefore")
+            {
+                MessageBox.Show("OnAction_PageBreakBefore: You clicked " + control.Id);
+            }
+            else
+            {
+                MessageBox.Show("OnAction_PageBreakBefore: You clicked a different control.");
+            }
+        }
+
+        // Toggle Button
+        public bool GetPressed_PageBreakBefore(Office.IRibbonControl control)
+        {
+            if (control.Id == "btnPageBreakBefore")
+            {
+                MessageBox.Show("GetPressed_PageBreakBefore: You clicked " + control.Id);
+            }
+            else
+            {
+                MessageBox.Show("GetPressed_PageBreakBefore: You clicked a different control.");
+            }
+
+            return true;
         }
 
         #region Helpers
