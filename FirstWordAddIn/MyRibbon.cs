@@ -13,11 +13,11 @@ namespace FirstWordAddIn
 
         }
 
-        private void onAction_button(object sender, RibbonControlEventArgs e)
+        private void OnAction_Button(object sender, RibbonControlEventArgs e)
         {
             switch (e.Control.Id)
             {
-                case "btnAbout":
+                case "AboutButton":
                     AboutForm frmAbout = new AboutForm();
                     frmAbout.ShowDialog();
                     break;

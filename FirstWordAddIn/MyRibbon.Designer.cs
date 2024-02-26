@@ -36,12 +36,12 @@
         {
             this.tab1 = this.Factory.CreateRibbonTab();
             this.group1 = this.Factory.CreateRibbonGroup();
-            this.tab2 = this.Factory.CreateRibbonTab();
-            this.group2 = this.Factory.CreateRibbonGroup();
-            this.btnAbout = this.Factory.CreateRibbonButton();
+            this.MyTab = this.Factory.CreateRibbonTab();
+            this.InfoGroup = this.Factory.CreateRibbonGroup();
+            this.AboutButton = this.Factory.CreateRibbonButton();
             this.tab1.SuspendLayout();
-            this.tab2.SuspendLayout();
-            this.group2.SuspendLayout();
+            this.MyTab.SuspendLayout();
+            this.InfoGroup.SuspendLayout();
             this.SuspendLayout();
             // 
             // tab1
@@ -56,42 +56,42 @@
             this.group1.Label = "group1";
             this.group1.Name = "group1";
             // 
-            // tab2
+            // MyTab
             // 
-            this.tab2.Groups.Add(this.group2);
-            this.tab2.Label = "MyTab";
-            this.tab2.Name = "tab2";
+            this.MyTab.Groups.Add(this.InfoGroup);
+            this.MyTab.Label = "MyTab";
+            this.MyTab.Name = "MyTab";
             // 
-            // group2
+            // InfoGroup
             // 
-            this.group2.Items.Add(this.btnAbout);
-            this.group2.Label = "Info";
-            this.group2.Name = "group2";
+            this.InfoGroup.Items.Add(this.AboutButton);
+            this.InfoGroup.Label = "Info";
+            this.InfoGroup.Name = "InfoGroup";
             // 
-            // btnAbout
+            // AboutButton
             // 
-            this.btnAbout.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-            this.btnAbout.Label = "button1";
-            this.btnAbout.Name = "btnAbout";
-            this.btnAbout.OfficeImageId = "About";
-            this.btnAbout.ScreenTip = "About this add-in";
-            this.btnAbout.ShowImage = true;
-            this.btnAbout.SuperTip = "Information about this add-in.";
-            this.btnAbout.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.onAction_button);
+            this.AboutButton.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.AboutButton.Label = "button1";
+            this.AboutButton.Name = "AboutButton";
+            this.AboutButton.OfficeImageId = "About";
+            this.AboutButton.ScreenTip = "About this add-in";
+            this.AboutButton.ShowImage = true;
+            this.AboutButton.SuperTip = "Information about this add-in.";
+            this.AboutButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.OnAction_Button);
             // 
             // MyRibbon
             // 
             this.Name = "MyRibbon";
             this.RibbonType = "Microsoft.Word.Document";
             this.Tabs.Add(this.tab1);
-            this.Tabs.Add(this.tab2);
+            this.Tabs.Add(this.MyTab);
             this.Load += new Microsoft.Office.Tools.Ribbon.RibbonUIEventHandler(this.MyRibbon_Load);
             this.tab1.ResumeLayout(false);
             this.tab1.PerformLayout();
-            this.tab2.ResumeLayout(false);
-            this.tab2.PerformLayout();
-            this.group2.ResumeLayout(false);
-            this.group2.PerformLayout();
+            this.MyTab.ResumeLayout(false);
+            this.MyTab.PerformLayout();
+            this.InfoGroup.ResumeLayout(false);
+            this.InfoGroup.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -100,9 +100,9 @@
 
         internal Microsoft.Office.Tools.Ribbon.RibbonTab tab1;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup group1;
-        internal Microsoft.Office.Tools.Ribbon.RibbonTab tab2;
-        internal Microsoft.Office.Tools.Ribbon.RibbonGroup group2;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton btnAbout;
+        internal Microsoft.Office.Tools.Ribbon.RibbonTab MyTab;
+        internal Microsoft.Office.Tools.Ribbon.RibbonGroup InfoGroup;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton AboutButton;
     }
 
     partial class ThisRibbonCollection
