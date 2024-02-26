@@ -1,4 +1,5 @@
-﻿using Microsoft.Office.Tools.Ribbon;
+﻿using Microsoft.Office.Interop.Word;
+using Microsoft.Office.Tools.Ribbon;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,6 +9,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 using Office = Microsoft.Office.Core;
+
 
 // TODO:  Follow these steps to enable the Ribbon (XML) item:
 
@@ -77,29 +79,43 @@ namespace FirstWordAddIn
         // Toggle Button
         public void OnAction_PageBreakBefore(Office.IRibbonControl control, bool pressed)
         {
-            if (control.Id == "btnPageBreakBefore")
+            if (control.Id != "btnPageBreakBefore")
             {
-                MessageBox.Show("OnAction_PageBreakBefore: You clicked " + control.Id);
+                ribbon.Invalidate();
+            }
+
+            Selection selection = Globals.ThisAddIn.Application.Selection;
+
+            if (pressed == true)
+            {
+                selection.ParagraphFormat.PageBreakBefore = 1;
             }
             else
             {
-                MessageBox.Show("OnAction_PageBreakBefore: You clicked a different control.");
+                selection.ParagraphFormat.PageBreakBefore = 0;
             }
+
+            ribbon.Invalidate();
         }
 
         // Toggle Button
         public bool GetPressed_PageBreakBefore(Office.IRibbonControl control)
         {
-            if (control.Id == "btnPageBreakBefore")
+            if (control.Id != "btnPageBreakBefore")
             {
-                MessageBox.Show("GetPressed_PageBreakBefore: You clicked " + control.Id);
+                return false;
+            }
+
+            Selection selection = Globals.ThisAddIn.Application.Selection;
+
+            if (selection.ParagraphFormat.PageBreakBefore == 1)
+            {
+                return true;
             }
             else
             {
-                MessageBox.Show("GetPressed_PageBreakBefore: You clicked a different control.");
+                return false;
             }
-
-            return true;
         }
 
         #region Helpers
