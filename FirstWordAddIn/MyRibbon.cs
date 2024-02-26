@@ -1,30 +1,145 @@
-﻿using Microsoft.Office.Tools.Ribbon;
+﻿using Microsoft.Office.Interop.Word;
+using Microsoft.Office.Tools.Ribbon;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
+using System.Windows.Forms;
+using Office = Microsoft.Office.Core;
+
+
+// TODO:  Follow these steps to enable the Ribbon (XML) item:
+
+// 1: Copy the following code block into the ThisAddin, ThisWorkbook, or ThisDocument class.
+
+//  protected override Microsoft.Office.Core.IRibbonExtensibility CreateRibbonExtensibilityObject()
+//  {
+//      return new MyRibbon();
+//  }
+
+// 2. Create callback methods in the "Ribbon Callbacks" region of this class to handle user
+//    actions, such as clicking a button. Note: if you have exported this Ribbon from the Ribbon designer,
+//    move your code from the event handlers to the callback methods and modify the code to work with the
+//    Ribbon extensibility (RibbonX) programming model.
+
+// 3. Assign attributes to the control tags in the Ribbon XML file to identify the appropriate callback methods in your code.  
+
+// For more information, see the Ribbon XML documentation in the Visual Studio Tools for Office Help.
+
 
 namespace FirstWordAddIn
 {
-    public partial class MyRibbon
+    [ComVisible(true)]
+    public class MyRibbon : Office.IRibbonExtensibility
     {
-        private void MyRibbon_Load(object sender, RibbonUIEventArgs e)
-        {
+        private Office.IRibbonUI ribbon;
 
+        public MyRibbon()
+        {
         }
 
-        private void OnAction_Button(object sender, RibbonControlEventArgs e)
+        #region IRibbonExtensibility Members
+
+        public string GetCustomUI(string ribbonID)
         {
-            switch (e.Control.Id)
+            return GetResourceText("FirstWordAddIn.MyRibbon.xml");
+        }
+
+        #endregion
+
+        #region Ribbon Callbacks
+        //Create callback methods here. For more information about adding callback methods, visit https://go.microsoft.com/fwlink/?LinkID=271226
+
+        public void Ribbon_Load(Office.IRibbonUI ribbonUI)
+        {
+            this.ribbon = ribbonUI;
+        }
+
+        #endregion
+
+        // Normal Button
+        public void OnAction_Button(Office.IRibbonControl control)
+        {
+            switch (control.Id)
             {
-                case "AboutButton":
+                case "btnAbout":
                     AboutForm frmAbout = new AboutForm();
                     frmAbout.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
                     frmAbout.ShowDialog();
                     break;
                 default:
+                    MessageBox.Show("You clicked " + control.Id);
                     break;
             }
         }
+
+        // Toggle Button
+        public void OnAction_PageBreakBefore(Office.IRibbonControl control, bool pressed)
+        {
+            if (control.Id != "btnPageBreakBefore")
+            {
+                ribbon.Invalidate();
+            }
+
+            Selection selection = Globals.ThisAddIn.Application.Selection;
+
+            if (pressed == true)
+            {
+                selection.ParagraphFormat.PageBreakBefore = 1;
+            }
+            else
+            {
+                selection.ParagraphFormat.PageBreakBefore = 0;
+            }
+
+            ribbon.Invalidate();
+        }
+
+        // Toggle Button
+        public bool GetPressed_PageBreakBefore(Office.IRibbonControl control)
+        {
+            if (control.Id != "btnPageBreakBefore")
+            {
+                return false;
+            }
+
+            Selection selection = Globals.ThisAddIn.Application.Selection;
+
+            if (selection.ParagraphFormat.PageBreakBefore == 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        #region Helpers
+
+        private static string GetResourceText(string resourceName)
+        {
+            Assembly asm = Assembly.GetExecutingAssembly();
+            string[] resourceNames = asm.GetManifestResourceNames();
+            for (int i = 0; i < resourceNames.Length; ++i)
+            {
+                if (string.Compare(resourceName, resourceNames[i], StringComparison.OrdinalIgnoreCase) == 0)
+                {
+                    using (StreamReader resourceReader = new StreamReader(asm.GetManifestResourceStream(resourceNames[i])))
+                    {
+                        if (resourceReader != null)
+                        {
+                            return resourceReader.ReadToEnd();
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+
+        #endregion
     }
 }

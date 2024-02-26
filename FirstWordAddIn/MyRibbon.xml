@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<customUI xmlns="http://schemas.microsoft.com/office/2009/07/customui" onLoad="Ribbon_Load">
+	<ribbon>
+		<tabs>
+			<tab id="MyTab" label="MyTab">
+				<!-- Info -->
+				<group id="Info" label="Info" >
+					<button id="btnAbout" imageMso="About" size="large" screentip= "About Documizer Author Tool" supertip="Information about the Documizer Author Tool." onAction="OnAction_Button" />
+				</group>
+
+				<!-- Page Orientation -->
+				<group id="PageOrientation" label="Page Orientation" >
+					<button id="btnInsertLandscape" label=" Landscape" imageMso="PageOrientationLandscape" onAction="OnAction_Button" screentip="Insert Landscape Page" supertip="Insert a page in Landscape orientation."/>
+					<button id="btnInsertPortrait" label=" Portrait" imageMso="PageOrientationPortrait" onAction="OnAction_Button" screentip="Insert Portrait Page" supertip="Insert a page in Portrait orientation."/>
+					<button id="btnRotate" label=" Rotate" imageMso="ObjectRotateGallery" onAction="OnAction_Button" screentip="Rotate" supertip="Rotate section to either Landscape or Portrait."/>
+				</group>
+
+				<!-- Formatting -->
+				<group id="Formatting" label="Formatting" >
+					<toggleButton id="btnPageBreakBefore" label=" Page Break Before" imageMso="BreakInsertDialog" size="normal" getPressed="GetPressed_PageBreakBefore" onAction="OnAction_PageBreakBefore" screentip="Page Break Before" supertip="Force text to move to the top of next page." />
+					<toggleButton id="btnKeepWithNext" label=" Keep With Next " imageMso="ParagraphSpacingIncrease" size="normal" getPressed="getPressed_KeepWithNext" onAction="onAction_KeepWithNext" screentip="Keep with Next" supertip="Keep the selected paragraph with the following paragraph." />
+					<button id="btnHyperlinkBlue" image="Blue_4" label=" Hyperlink Blue" screentip="Hyperlink Blue" supertip="Apply Hyperlink Blue to the selected text." onAction="OnAction_Button"/>
+					<separator id="sepFormatting02"/>
+					<button id="btnNonBreaking_Space" label="No Break Space" screentip="Non-breaking Space" supertip="Insert a non-breaking space to prevent text from being divided onto two lines." onAction="OnAction_Button"/>
+					<button id="btnNonBreaking_Hyphen" label="No Break Hyphen" screentip="Non-breaking Hyphen" supertip="Insert a non-breaking hyphen to prevent text from being divided onto two lines." onAction="OnAction_Button"/>
+					<menu id="Cleaner" label=" Cleaner" imageMso="FormFieldClear" screentip="Cleaner" supertip="Clear coloring from selected text or delete hidden text and guidance text." >
+						<button id="btnClearColoring" label="Clear Coloring" supertip="Clear coloring of selected text." onAction="OnAction_Button"/>
+						<button id="btnDeleteGuidanceText" label="Delete Guidance" supertip="Delete hidden text and guidance text in italic green." onAction="OnAction_Button"/>
+					</menu>
+				</group>
+
+			</tab>
+		</tabs>
+	</ribbon>
+</customUI>
+
