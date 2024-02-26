@@ -19,6 +19,7 @@ namespace FirstWordAddIn
             {
                 case "AboutButton":
                     AboutForm frmAbout = new AboutForm();
+                    frmAbout.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
                     frmAbout.ShowDialog();
                     break;
                 default:
